@@ -36,31 +36,51 @@ class LinkedList:
         else:
             return 'Value located at index {}.'.format(counter)
 
-    # Display entire linked list in two ways. (We are cheating a little by storing
-    # the values in a Python list but this will save many lines of code when
-    # implementing the .add() methods further down below.)
-    def display_fwd(self):
+    def reverse(self):
+        temp = LinkedList()
         node = self.head
-        result = []
         while node:
-            #print(node.value, end = ' ')
-            result.append(node.value)
+            temp.insert(node.value)
             node = node.go
-        #print('')
-        return result
+        self.head = temp.head
 
-    def display_back(self):
-        node = self.head
-        result = []
-        while node:
-            #print(node.value, end = ' ')
-            result.insert(0, node.value)
-            node = node.go
-        #print('')
-        return result
-
+    # Display entire linked list.
     def display(self):
-        return self.display_fwd()
+        node = self.head
+        if node:
+            result = str(node.value)
+            node = node.go
+            while node:
+                result = result + ' -> ' + str(node.value)
+                node = node.go
+            return result
+        else:
+            return None
+
+    # String-concatenate list forwards and backwards.
+    def concat_fwd(self):
+        node = self.head
+        if node:
+            result = str(node.value)
+            node = node.go
+            while node:
+                result = result + str(node.value)
+                node = node.go
+            return result
+        else:
+            return None
+
+    def concat_bwd(self):
+        node = self.head
+        if node:
+            result = str(node.value)
+            node = node.go
+            while node:
+                result = str(node.value) + result
+                node = node.go
+            return result
+        else:
+            return None
 
     # .delete() removes the first occurrence of a provided value. It is accomplished
     # by linking the node before the to-be-deleted node to the node after it and
@@ -84,14 +104,14 @@ class LinkedList:
     # concatenated number.
     def add_fwd(self, other):
         try:
-            return int(''.join([str(i) for i in self.display_fwd()])) + \
-                int(''.join([str(i) for i in other.display_fwd()]))
+            return int(''.join([i for i in self.concat_fwd()])) + \
+                int(''.join([i for i in other.concat_fwd()]))
         except:
             raise Exception('Cannot add lists containing strings.')
 
-    def add_back(self, other):
+    def add_bwd(self, other):
         try:
-            return int(''.join([str(i) for i in self.display_back()])) + \
-                int(''.join([str(i) for i in other.display_back()]))
+            return int(''.join([i for i in self.concat_bwd()])) + \
+                int(''.join([i for i in other.concat_bwd()]))
         except:
             raise Exception('Cannot add lists containing strings.')
