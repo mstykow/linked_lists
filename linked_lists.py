@@ -9,6 +9,7 @@ class Node:
     
 class LinkedList:
 
+    # head is a node which initially is None unless otherwise specified
     def __init__(self, head = None):
         self.head = head
 
@@ -100,7 +101,7 @@ class LinkedList:
             else:
                 temp_node.go = node.go
 
-    # Two methods for adding two lists of numbers treating each list as a
+    # Two methods for adding two linked lists of numbers treating each list as a
     # concatenated number.
     def add_fwd(self, other):
         try:
