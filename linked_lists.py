@@ -9,7 +9,7 @@ class Node:
     
 class LinkedList:
 
-    # head is a node which initially is None unless otherwise specified
+    # Head is a node which initially is None unless otherwise specified
     def __init__(self, head = None):
         self.head = head
 
